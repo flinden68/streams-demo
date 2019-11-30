@@ -19,7 +19,7 @@ public class DemoProducer {
   private ProducerBinding producer;
 
   public void postTodoOnQueue(Todo todo){
-    log.info("let's posted the todo......");
+
     if(todo.getCreated()==null){
       todo.setCreated(LocalDateTime.now());
     }
@@ -30,7 +30,7 @@ public class DemoProducer {
       .setHeader("type", "open")
       .build();
 
-    log.info("Post Message on Queue: {}", msgTodo);
+    log.info("Post Open Message on Queue: {}", msgTodo);
     producer.producerChannel().send(msgTodo);
   }
 }
