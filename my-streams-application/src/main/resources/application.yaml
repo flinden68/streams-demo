@@ -1,0 +1,23 @@
+server:
+  port: 3031
+  ssl:
+    enabled: false
+  servlet:
+    context-path: /demo
+
+spring:
+  cloud:
+    stream:
+      rabbit:
+        binder:
+          headers: type
+      bindings:
+        consumerChannel:
+          binder: rabbit
+          destination: demo-queue
+        producerChannel:
+          binder: rabbit
+          destination: demo-queue
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/todo-store
