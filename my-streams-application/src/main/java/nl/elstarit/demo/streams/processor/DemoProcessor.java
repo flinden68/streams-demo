@@ -27,7 +27,7 @@ public class DemoProcessor {
       .setHeader("type", "completed")
       .build();
 
-    log.info("Post Closed Message on Queue: {}", msgTodo);
+    log.info("Post Completed Message on Queue: {}", msgTodo);
     producer.producerChannel().send(msgTodo);
   }
 }
