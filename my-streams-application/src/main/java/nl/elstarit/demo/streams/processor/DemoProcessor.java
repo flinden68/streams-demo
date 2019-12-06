@@ -19,7 +19,7 @@ public class DemoProcessor {
 
   @StreamListener(target = ConsumerBinding.INPUT, condition = "headers['type']=='open'")
   public void processOpen(Todo todo) {
-    log.info("Received Open Todo from queue: {}", todo);
+    log.info("[DemoProcessor]: Received Open Todo from queue: {}", todo);
     todo.setCompleted(true);
 
     Message<Todo> msgTodo = MessageBuilder
@@ -27,7 +27,7 @@ public class DemoProcessor {
       .setHeader("type", "completed")
       .build();
 
-    log.info("Post Completed Message on Queue: {}", msgTodo);
+    log.info("[DemoProcessor]: Post Completed Message on Queue - {}", msgTodo);
     producer.producerChannel().send(msgTodo);
   }
 }

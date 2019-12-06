@@ -23,14 +23,14 @@ public class DemoProducer {
     if(todo.getCreated()==null){
       todo.setCreated(LocalDateTime.now());
     }
-    todo.setId(UUID.randomUUID().toString());
+    //todo.setId(UUID.randomUUID().toString());
 
     Message<Todo> msgTodo = MessageBuilder
       .withPayload(todo)
       .setHeader("type", "open")
       .build();
 
-    log.info("Post Open Message on Queue: {}", msgTodo);
+    log.info("[DemoProducer]: Post Open Message on Queue - {}", msgTodo);
     producer.producerChannel().send(msgTodo);
   }
 }
