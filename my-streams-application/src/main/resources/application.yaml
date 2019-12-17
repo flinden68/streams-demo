@@ -6,6 +6,8 @@ server:
     context-path: /demo
 
 spring:
+  rabbitmq:
+    addresses: amqp://qyzmcbdp:h20HD2jjdmJdXUN3960HM7z1oihn4YZ4@hawk.rmq.cloudamqp.com/qyzmcbdp
   cloud:
     stream:
       rabbit:

@@ -3,7 +3,7 @@ import {
   CONTENT_TYPE_JSON,
   EXCHANGE,
   QUEUE_COMPLETED,
-  QUEUE_OPEN, ROUTING_KEY_TODO_OPEN
+  QUEUE_OPEN, RABBITMQ_CLOUD_URL, RABBITMQ_LOCAL_URL, ROUTING_KEY_TODO_OPEN
 } from "../constants/todo.constants";
 import {Todo} from "../domain/todo";
 
@@ -26,21 +26,24 @@ export class TodoProcessor {
   }
 
   process(){
-      let connection = new Amqp.Connection("amqp://localhost");
+      let connection = new Amqp.Connection(RABBITMQ_LOCAL_URL);
       let exchange = connection.declareExchange(EXCHANGE, "amq.topic", {durable: true, noCreate: true});
-      let queueOpen = connection.declareQueue(QUEUE_OPEN);
-      queueOpen.bind(exchange);
-      queueOpen.activateConsumer((message) => {
-        if(message.properties.headers.type ==='open') {
+      connection.completeConfiguration().then(() => {
+        let queueOpen = connection.declareQueue(QUEUE_OPEN);
+        queueOpen.bind(exchange);
+        queueOpen.activateConsumer((message) => {
           console.log("QUEUE OPEN: " + JSON.stringify(message.getContent()));
-          let todo: Todo = new Todo(null, message.getContent().subject, message.getContent().description);
-          todo.setCreated(message.getContent().created);
-          todo.setCompleted(true);
+          if (message.properties.headers.type === 'open') {
 
-          let msgTodo = new Amqp.Message(todo, opts);
-          exchange.send(msgTodo);
-          //message.ack();
-        }
+            let todo: Todo = new Todo(null, message.getContent().subject, message.getContent().description);
+            todo.setCreated(message.getContent().created);
+            todo.setCompleted(true);
+
+            let msgTodo = new Amqp.Message(todo, opts);
+            exchange.send(msgTodo);
+            //message.ack();
+          }
+        });
       });
   }
 }
