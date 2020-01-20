@@ -26,7 +26,7 @@ public class DemoConsumer {
   @StreamListener(target = ConsumerBinding.INPUT, condition = "headers['type']=='completed'")
   public void processCompleted(Todo todo) {
     log.info("[DemoConsumer]: Received Completed Todo from queue - {}", todo);
-    //srepository.save(todo);
+    //repository.save(todo);
     redisRepository.save(todo);
   }
 
