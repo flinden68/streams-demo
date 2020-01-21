@@ -1,5 +1,11 @@
 # NodeJS streams demo
+A nodeJS application which interacts with an event bus
 
+## Run it
+```
+npm install
+npm run start
+```
 ## Producer
 
 ```

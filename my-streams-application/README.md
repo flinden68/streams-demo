@@ -1,7 +1,11 @@
 # Spring cloud stream Demo
 a demo Spring Cloud Streams application for my stream presentation
 
-
+## Run it
+```aidl
+mvn clean install
+mvn spring-boot:run
+```
 ## Producer
 There is a Swagger client to put messages on queue, http://localhost:3031/demo/swagger-ui.html
 ```

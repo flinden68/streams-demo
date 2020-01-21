@@ -21,3 +21,13 @@ A very good GUI is [MongoDb Compass Community edition](https://www.mongodb.com/p
 Redis can also be installed locally
 For more information, [see](https://redis.io/topics/quickstart)
 A nice GUI is [Redily](https://www.redily.app/)
+
+## Demo applications
+
+### Spring Cloud Stream demo
+In the directory 'my-streams-application' you can find a Spring demo application
+[More details](my-streams-application/README.md)
+
+### NodeJS demo
+In the directory 'nodejs-streams' you can find a NodeJS demo application
+[More details](nodejs-streams/README.md)
