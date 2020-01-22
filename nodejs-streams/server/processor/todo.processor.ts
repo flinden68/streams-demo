@@ -2,8 +2,7 @@ import * as Amqp from "amqp-ts";
 import {
   CONTENT_TYPE_JSON,
   EXCHANGE,
-  QUEUE_COMPLETED,
-  QUEUE_OPEN, RABBITMQ_CLOUD_URL, RABBITMQ_LOCAL_URL, ROUTING_KEY_TODO_OPEN
+  QUEUE_OPEN, RABBITMQ_LOCAL_URL
 } from "../constants/todo.constants";
 import {Todo} from "../domain/todo";
 
@@ -13,7 +12,6 @@ const opts = {
   },
   contentType : CONTENT_TYPE_JSON
 }
-
 
 export class TodoProcessor {
 
@@ -41,7 +39,6 @@ export class TodoProcessor {
 
             let msgTodo = new Amqp.Message(todo, opts);
             exchange.send(msgTodo);
-            //message.ack();
           }
         });
       });

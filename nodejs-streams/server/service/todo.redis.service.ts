@@ -20,8 +20,7 @@ export class TodoRedisService {
   save(todo : Todo){
     let uuId = uuidv1();
     console.log(JSON.stringify(todo));
-    let response : any = this.redisClient.set(uuId, JSON.stringify(todo));
-    console.log(response);
+    this.redisClient.set(uuId, JSON.stringify(todo));
   }
 
 }

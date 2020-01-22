@@ -4,7 +4,6 @@ import * as bodyParser from 'body-parser';
 import {ApiRoutes} from "./routes/api-routes";
 import {TodoConsumer} from "./consumer/todo.consumer";
 import {TodoProcessor} from "./processor/todo.processor";
-const cors = require('cors')
 
 dotenv.config();
 
@@ -13,7 +12,6 @@ const app = express();
 app.set('port', process.env.PORT || 4000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.get('/', homeController.index);
 
 app.use('/api', ApiRoutes);
 

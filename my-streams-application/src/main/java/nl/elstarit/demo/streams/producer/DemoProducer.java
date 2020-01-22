@@ -9,7 +9,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Slf4j
 @EnableBinding({ProducerBinding.class})
@@ -23,7 +22,6 @@ public class DemoProducer {
     if(todo.getCreated()==null){
       todo.setCreated(LocalDateTime.now());
     }
-    //todo.setId(UUID.randomUUID().toString());
 
     Message<Todo> msgTodo = MessageBuilder
       .withPayload(todo)

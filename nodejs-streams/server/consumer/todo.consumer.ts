@@ -1,4 +1,3 @@
-import {TodoService} from "../service/todo.service";
 import {Todo} from "../domain/todo";
 import * as Amqp from "amqp-ts";
 import {
@@ -6,9 +5,11 @@ import {
   QUEUE_COMPLETED, RABBITMQ_CLOUD_URL, RABBITMQ_LOCAL_URL
 } from "../constants/todo.constants";
 import {TodoRedisService} from "../service/todo.redis.service";
+import {TodoMongoService} from "../service/todo.mongo.service";
+
 export class TodoConsumer {
 
-  private mongoSservice : TodoService;
+  private mongoSservice : TodoMongoService;
   private redisService : TodoRedisService;
 
   constructor() {
@@ -16,7 +17,7 @@ export class TodoConsumer {
   }
 
   init(){
-    this.mongoSservice = new TodoService();
+    this.mongoSservice = new TodoMongoService();
     this.redisService = new TodoRedisService();
 
     console.log("Consumer open for business....");
@@ -34,9 +35,8 @@ export class TodoConsumer {
           let todo: Todo = new Todo(null, message.getContent().subject, message.getContent().description);
           todo.setCreated(message.getContent().created);
           todo.setCompleted(message.getContent().completed);
-          console.table(todo);
           this.mongoSservice.save(todo)
-          //this.redisService.save(todo);
+          this.redisService.save(todo);
           message.ack();
         }
       });
