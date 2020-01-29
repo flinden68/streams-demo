@@ -30,15 +30,15 @@ export class TodoProcessor {
         let queueOpen = connection.declareQueue(QUEUE_OPEN);
         queueOpen.bind(exchange);
         queueOpen.activateConsumer((message) => {
-          console.log("QUEUE OPEN: " + JSON.stringify(message.getContent()));
           if (message.properties.headers.type === 'open') {
-
+            console.log("QUEUE OPEN: " + JSON.stringify(message.getContent()));
             let todo: Todo = new Todo(null, message.getContent().subject, message.getContent().description);
             todo.setCreated(message.getContent().created);
             todo.setCompleted(true);
 
             let msgTodo = new Amqp.Message(todo, opts);
             exchange.send(msgTodo);
+            message.ack();
           }
         });
       });

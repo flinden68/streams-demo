@@ -25,7 +25,7 @@ export class TodoProducer{
     let exchange = connection.declareExchange(EXCHANGE, "amq.topic", {durable: true, noCreate: true});
     connection.completeConfiguration().then(() => {
       let msgTodo = new Amqp.Message(todo, opts);
-      console.log("Post to queue: " + JSON.stringify(msgTodo));
+      console.log("POST TO QUEUE: " + JSON.stringify(msgTodo));
       exchange.send(msgTodo, ROUTING_KEY_TODO_OPEN);
     });
   }
