@@ -2,7 +2,7 @@ import {Todo} from "../domain/todo";
 import * as Amqp from "amqp-ts";
 import {
   EXCHANGE,
-  QUEUE_COMPLETED, RABBITMQ_CLOUD_URL, RABBITMQ_LOCAL_URL
+  QUEUE_COMPLETED, RABBITMQ_LOCAL_URL
 } from "../constants/todo.constants";
 import {TodoRedisService} from "../service/todo.redis.service";
 import {TodoMongoService} from "../service/todo.mongo.service";

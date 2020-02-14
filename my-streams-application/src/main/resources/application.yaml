@@ -7,7 +7,7 @@ server:
 
 spring:
   rabbitmq:
-    addresses: amqp://localhost #amqp://qyzmcbdp:h20HD2jjdmJdXUN3960HM7z1oihn4YZ4@hawk.rmq.cloudamqp.com/qyzmcbdp
+    addresses: amqp://localhost
   cloud:
     stream:
       rabbit:
